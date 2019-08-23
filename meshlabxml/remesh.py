@@ -71,7 +71,7 @@ def simplify(script, texture=True, faces=25000, target_perc=0.0,
         1.3.4BETA
     """
     if texture:
-        if isinstance(script, FilterScript) and (script.ml_version == '2016.12'):
+        if isinstance(script, FilterScript) and ( (script.ml_version == '2016.12') or (script.ml_version == '2019.7') ):
             filter_xml = '  <filter name="Simplification: Quadric Edge Collapse Decimation (with texture)">\n'
         else:
             filter_xml = '  <filter name="Quadric Edge Collapse Decimation (with texture)">\n'

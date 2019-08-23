@@ -248,8 +248,9 @@ def small_parts(script, ratio=0.2, non_closed_only=False):
         2016.12
         1.3.4BETA
     """
-    filter_xml = ''.join([
-        '  <filter name="Small component selection">\n',
+    if script.ml_version == '2019.7':
+          filter_xml = ''.join([
+        '  <filter name="Select small disconnected component">\n',
         '    <Param name="NbFaceRatio" ',
         'value="{}" '.format(ratio),
         'description="Small component ratio" ',
@@ -261,6 +262,22 @@ def small_parts(script, ratio=0.2, non_closed_only=False):
         'type="RichBool" ',
         '/>\n',
         '  </filter>\n'])
+
+    else:
+
+      filter_xml = ''.join([
+          '  <filter name="Small component selection">\n',
+          '    <Param name="NbFaceRatio" ',
+          'value="{}" '.format(ratio),
+          'description="Small component ratio" ',
+          'type="RichFloat" ',
+          '/>\n',
+          '    <Param name="NonClosedOnly" ',
+          'value="{}" '.format(str(non_closed_only).lower()),
+          'description="Select only non closed components" ',
+          'type="RichBool" ',
+          '/>\n',
+          '  </filter>\n'])
     util.write_filter(script, filter_xml)
     return None
 
